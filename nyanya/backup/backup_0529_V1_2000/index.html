@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이유식 트래커</title>
+    <style>
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2');
+            font-weight: 100; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2') format('woff2');
+            font-weight: 200; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2');
+            font-weight: 300; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
+            font-weight: 500; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
+            font-weight: 600; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800; font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperlogy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-9Black.woff2') format('woff2');
+            font-weight: 900; font-display: swap;
+        }
+
+        :root {
+            --pk:        #F48FB1;
+            --pk-dark:   #EC407A;
+            --pk-light:  #FCE4EC;
+            --pk-pale:   #FFF5F8;
+            --yl:        #FFD54F;
+            --yl-light:  #FFF8E1;
+            --yl-pale:   #FFFDE7;
+            --bg:        #FFFEF8;
+            --card:      #FFFFFF;
+            --text:      #5C3848;
+            --text-mid:  #9A7080;
+            --text-light:#C8A8B5;
+            --border:    #FFE4EE;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Paperlogy', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ── 헤더 ── */
+        .header {
+            background: linear-gradient(120deg, #F9A8C9 0%, #FFD08A 100%);
+            padding: 18px 18px 14px;
+            position: sticky; top: 0; z-index: 200;
+            box-shadow: 0 2px 12px rgba(244,143,177,0.25);
+        }
+        .header h1  { font-size: 18px; font-weight: 900; color: white; letter-spacing: -0.3px; text-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        .header-sub { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.9); margin-top: 3px; }
+
+        /* ── 탭 ── */
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--pk-light);
+            position: sticky; top: 58px; z-index: 199;
+        }
+        .tab {
+            flex: 1; padding: 12px 4px;
+            text-align: center; font-size: 13px; font-weight: 400;
+            cursor: pointer; color: var(--text-light);
+            border-bottom: 2.5px solid transparent;
+            transition: all 0.18s; margin-bottom: -2px;
+        }
+        .tab.active { color: var(--pk); border-bottom-color: var(--pk); font-weight: 800; }
+
+        .content { display: none; }
+        .content.active { display: block; }
+
+        /* ── 통계 띠 ── */
+        .stats-bar {
+            display: flex; gap: 8px;
+            padding: 10px 14px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+        }
+        .stat-chip {
+            flex-shrink: 0;
+            border-radius: 12px; padding: 7px 14px;
+            text-align: center;
+        }
+        .stat-chip.pink   { background: var(--pk-pale); border: 1px solid var(--pk-light); }
+        .stat-chip.yellow { background: var(--yl-pale); border: 1px solid #FFE082; }
+        .stat-chip .sv    { font-size: 17px; font-weight: 900; line-height: 1; }
+        .stat-chip.pink .sv   { color: var(--pk); }
+        .stat-chip.yellow .sv { color: #C8980A; }
+        .stat-chip .sl    { font-size: 10px; font-weight: 300; margin-top: 2px; }
+        .stat-chip.pink .sl   { color: #D0789A; }
+        .stat-chip.yellow .sl { color: #B88A00; }
+
+        /* ── 달력 네비 ── */
+        .cal-nav-bar {
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px 8px;
+            background: white;
+        }
+        .cal-title { font-size: 17px; font-weight: 900; }
+        .nav-btn {
+            background: var(--pk-pale); border: none;
+            width: 34px; height: 34px; border-radius: 50%;
+            font-size: 20px; cursor: pointer; color: var(--pk);
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+        }
+        .nav-btn:hover { background: var(--pk-light); }
+
+        /* ── 달력 그리드 ── */
+        .cal-wrap { padding: 0 10px 8px; background: white; }
+
+        .cal-weekrow {
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            margin-bottom: 4px;
+        }
+        .cal-weekrow span {
+            text-align: center; font-size: 11px; font-weight: 700;
+            color: var(--text-light); padding: 4px 0;
+        }
+        .cal-weekrow span:first-child { color: #F48FB1; }
+        .cal-weekrow span:last-child  { color: #90CAF9; }
+
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+
+        .cal-cell {
+            border-radius: 10px; padding: 5px 2px 4px;
+            min-height: 68px; cursor: pointer;
+            border: 1.5px solid transparent;
+            display: flex; flex-direction: column;
+            align-items: center; transition: all 0.12s;
+        }
+        .cal-cell:hover:not(.other-month) { background: var(--pk-pale); }
+        .cal-cell.selected { background: var(--pk-pale); border-color: var(--pk); }
+        .cal-cell.other-month { opacity: 0.3; cursor: default; pointer-events: none; }
+
+        .cell-num {
+            font-size: 13px; font-weight: 700;
+            width: 26px; height: 26px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; color: var(--text);
+        }
+        .cal-cell.today .cell-num { background: var(--pk); color: white; font-weight: 800; }
+        .cal-cell.selected:not(.today) .cell-num { color: var(--pk); }
+
+        .cell-dp {
+            font-size: 8px; color: var(--text-light);
+            font-weight: 200; line-height: 1;
+            margin-top: 1px; letter-spacing: -0.2px;
+        }
+
+        .cell-dots {
+            display: flex; flex-wrap: wrap;
+            justify-content: center; gap: 2px;
+            padding: 3px 1px; flex: 1;
+        }
+        .food-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+        .cell-gtotal {
+            font-size: 8px; font-weight: 600;
+            color: var(--text-light); margin-top: auto; padding-top: 1px;
+        }
+
+        /* ── 날짜 상세 패널 ── */
+        .day-panel {
+            margin: 10px 12px 0;
+            background: var(--card);
+            border-radius: 18px; padding: 14px 14px 12px;
+            box-shadow: 0 3px 16px rgba(244,143,177,0.14);
+            border: 1.5px solid var(--pk-light);
+        }
+        .dp-head {
+            display: flex; align-items: center;
+            justify-content: space-between; margin-bottom: 12px;
+        }
+        .dp-date { font-size: 15px; font-weight: 900; }
+        .dp-badges { display: flex; gap: 6px; align-items: center; }
+        .dp-badge-dp {
+            background: var(--yl-light); color: #C8980A;
+            font-size: 11px; font-weight: 600;
+            padding: 3px 10px; border-radius: 100px;
+        }
+        .dp-badge-add {
+            background: var(--pk-pale); color: var(--pk);
+            font-size: 11px; font-weight: 700;
+            padding: 3px 10px; border-radius: 100px;
+            border: 1px solid var(--pk-light); cursor: pointer;
+        }
+        .dp-badge-add:hover { background: var(--pk-light); }
+
+        .dp-food-row {
+            display: flex; align-items: center; gap: 8px;
+            padding: 7px 10px;
+            background: var(--bg); border-radius: 10px;
+            margin-bottom: 5px;
+        }
+        .dp-emoji { font-size: 18px; }
+        .dp-name  { flex: 1; font-size: 14px; font-weight: 500; }
+        .dp-amt   { font-size: 14px; font-weight: 900; color: var(--pk); }
+        .dp-new-tag {
+            font-size: 10px; font-weight: 600;
+            background: var(--yl-light); color: #C8980A;
+            padding: 2px 7px; border-radius: 100px;
+        }
+        .dp-del {
+            background: none; border: none;
+            color: var(--text-light); font-size: 17px;
+            cursor: pointer; padding: 0 2px; line-height: 1;
+        }
+        .dp-del:hover { color: #E05252; }
+
+        .dp-total-row {
+            display: flex; justify-content: flex-end; align-items: center; gap: 6px;
+            padding: 8px 4px 2px;
+            border-top: 1px dashed var(--border); margin-top: 6px;
+        }
+        .dp-total-label { font-size: 12px; font-weight: 300; color: var(--text-light); }
+        .dp-total-val   { font-size: 17px; font-weight: 900; color: var(--pk); }
+        .dp-empty { text-align: center; padding: 20px; color: var(--text-light); font-size: 13px; }
+
+        /* ── 범례 ── */
+        .legend-outer {
+            margin: 10px 12px 12px;
+            padding: 10px 12px;
+            background: var(--yl-pale);
+            border-radius: 12px; border: 1px solid #FFE082;
+        }
+        .legend-title { font-size: 11px; font-weight: 300; color: #B88A00; margin-bottom: 7px; }
+        .legend-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+        .legend-chip {
+            display: flex; align-items: center; gap: 3px;
+            padding: 3px 9px; border-radius: 100px;
+            font-size: 11px; font-weight: 600;
+        }
+
+        /* ── 공통 ── */
+        .padded { padding: 14px; }
+
+        .card {
+            background: var(--card); border-radius: 16px;
+            padding: 16px; margin-bottom: 12px;
+            box-shadow: 0 1px 8px rgba(244,143,177,0.08);
+            border: 1px solid var(--border);
+        }
+        .card-title {
+            font-size: 11px; font-weight: 300;
+            color: var(--text-light); text-transform: uppercase;
+            letter-spacing: 1.2px; margin-bottom: 14px;
+        }
+
+        .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .sec-title { font-size: 15px; font-weight: 900; }
+
+        /* ── 폼 ── */
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 5px; }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%; padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px; font-size: 14px;
+            font-family: inherit; background: white; color: var(--text);
+            transition: border-color 0.18s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus { outline: none; border-color: var(--pk); }
+        .form-group input[readonly] { background: var(--bg); color: var(--text-light); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        /* ── 버튼 ── */
+        .btn {
+            padding: 10px 16px; border-radius: 10px;
+            font-size: 14px; font-weight: 600;
+            cursor: pointer; border: none; font-family: inherit; transition: all 0.15s;
+        }
+        .btn-primary { background: var(--pk); color: white; width: 100%; }
+        .btn-primary:hover { background: var(--pk-dark); }
+        .btn-outline { background: transparent; color: var(--pk); border: 1.5px solid var(--pk); }
+        .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 8px; }
+        .modal-btns { display: flex; gap: 8px; margin-top: 10px; }
+        .modal-btns .btn { flex: 1; }
+
+        /* ── 재고 카드 ── */
+        .stock-card {
+            background: var(--card); border-radius: 14px;
+            padding: 14px; margin-bottom: 10px;
+            box-shadow: 0 1px 6px rgba(244,143,177,0.1);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--pk-light);
+        }
+        .stock-card.s-warn   { border-left-color: var(--yl); }
+        .stock-card.s-danger { border-left-color: #EF9A9A; }
+
+        .stock-top  { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 4px; }
+        .stock-name { font-size: 16px; font-weight: 900; }
+        .stock-meta { font-size: 12px; font-weight: 300; color: var(--text-light); margin-bottom: 8px; line-height: 1.8; }
+        .stock-meta span { margin-right: 8px; }
+
+        .expire-tag { display: inline-block; padding: 2px 9px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+        .expire-tag.good    { background: #E8F5E9; color: #4CAF50; }
+        .expire-tag.warning { background: var(--yl-light); color: #C8980A; }
+        .expire-tag.danger  { background: #FFEBEE; color: #E05252; }
+
+        .count-row  { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .count-big  { font-size: 28px; font-weight: 900; color: var(--pk); line-height: 1; }
+        .count-of   { font-size: 12px; font-weight: 300; color: var(--text-light); margin-top: 2px; }
+        .prog-wrap  { flex: 1; }
+        .prog-track { background: var(--pk-pale); border-radius: 100px; height: 7px; overflow: hidden; }
+        .prog-fill  { height: 100%; background: linear-gradient(90deg, var(--pk), #FFB7C5); border-radius: 100px; transition: width 0.4s; }
+        .prog-pct   { font-size: 11px; font-weight: 300; color: var(--text-light); margin-top: 3px; }
+
+        .count-btns { display: flex; gap: 5px; align-items: center; }
+        .circle-btn {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 1.5px solid var(--pk-light); background: white;
+            font-size: 19px; cursor: pointer; color: var(--pk);
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s; font-family: inherit;
+        }
+        .circle-btn:hover { background: var(--pk-pale); }
+        .use-btn {
+            background: var(--pk); color: white; border: none;
+            border-radius: 9px; padding: 7px 13px;
+            font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;
+        }
+        .use-btn:active { opacity: 0.8; }
+
+        .stock-actions { display: flex; gap: 6px; margin-top: 4px; }
+        .act-btn  { padding: 5px 11px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; }
+        .act-edit { background: var(--pk-pale); color: var(--pk); }
+        .act-del  { background: #FFF0F0; color: #E05252; }
+
+        /* ── 재료 칩 ── */
+        .ing-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+        .ing-chip {
+            display: flex; align-items: center; gap: 4px;
+            padding: 5px 11px; border-radius: 100px;
+            font-size: 12px; font-weight: 600; cursor: pointer;
+            border: 1.5px solid var(--border); background: white;
+            transition: all 0.15s;
+        }
+        .ing-chip:hover { border-color: var(--pk); }
+        .ing-chip.sel { border-color: var(--pk); background: var(--pk-pale); color: var(--pk); }
+
+        /* ── 편집 행 ── */
+        .edit-item-row {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 10px; background: var(--bg);
+            border-radius: 10px; margin-bottom: 6px;
+        }
+        .edit-item-emoji { font-size: 18px; }
+        .edit-item-name  { flex: 1; font-size: 14px; font-weight: 500; }
+        .edit-item-amt   {
+            width: 66px; padding: 6px 8px;
+            border: 1.5px solid var(--border); border-radius: 8px;
+            font-size: 13px; font-family: inherit; text-align: right; color: var(--text);
+        }
+        .edit-item-unit { font-size: 13px; color: var(--text-light); }
+        .new-btn {
+            font-size: 10px; padding: 2px 7px; border-radius: 100px;
+            font-weight: 700; cursor: pointer; border: none; font-family: inherit;
+        }
+        .new-off { background: #EEE; color: #AAA; }
+        .new-on  { background: var(--yl-light); color: #C8980A; }
+        .edit-del-btn {
+            background: none; border: none;
+            color: var(--text-light); font-size: 18px; cursor: pointer; line-height: 1;
+        }
+        .edit-del-btn:hover { color: #E05252; }
+
+        /* ── 모달 ── */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(80,30,50,0.35);
+            z-index: 400; display: none;
+            align-items: flex-end; justify-content: center;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: white; border-radius: 24px 24px 0 0;
+            padding: 20px 18px 32px;
+            width: 100%; max-width: 560px;
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal-head   { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .modal-title  { font-size: 18px; font-weight: 900; }
+        .modal-close  {
+            background: var(--pk-pale); border: none;
+            width: 30px; height: 30px; border-radius: 50%;
+            font-size: 18px; cursor: pointer; color: var(--pk);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .sub-label { font-size: 12px; font-weight: 300; color: var(--text-light); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .divider   { height: 1px; background: var(--border); margin: 12px 0; }
+
+        /* ── 아기 정보 ── */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .info-cell { background: var(--bg); border-radius: 10px; padding: 10px 12px; border: 1px solid var(--border); }
+        .info-cell .lbl { font-size: 11px; font-weight: 300; color: var(--text-light); margin-bottom: 2px; }
+        .info-cell .val { font-size: 14px; font-weight: 700; }
+        .info-cell.full { grid-column: 1 / -1; }
+
+        .empty { text-align: center; padding: 32px 16px; color: var(--text-light); font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<!-- ▣ 헤더 -->
+<div class="header">
+    <h1>이유식 트래커</h1>
+    <div class="header-sub" id="header-sub">아기 정보를 입력해주세요</div>
+</div>
+
+<!-- ▣ 탭 -->
+<div class="tabs">
+    <div class="tab active" onclick="switchTab('calendar')">달력 기록</div>
+    <div class="tab" onclick="switchTab('stock')">이유식 재고</div>
+    <div class="tab" onclick="switchTab('baby')">아기 정보</div>
+</div>
+
+<!-- ════ 달력 탭 ════ -->
+<div id="tab-calendar" class="content active">
+
+    <div class="stats-bar" id="stats-bar"></div>
+
+    <div class="cal-nav-bar">
+        <button class="nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+        <span class="cal-title" id="cal-title"></span>
+        <button class="nav-btn" onclick="changeMonth(1)">&#8250;</button>
+    </div>
+
+    <div class="cal-wrap">
+        <div class="cal-weekrow">
+            <span>일</span><span>월</span><span>화</span>
+            <span>수</span><span>목</span><span>금</span><span>토</span>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+    <!-- 선택 날짜 상세 패널 -->
+    <div class="day-panel" id="day-panel"></div>
+
+    <!-- 신규 재료 범례 -->
+    <div id="legend-wrap"></div>
+
+</div>
+
+<!-- ════ 재고 탭 ════ -->
+<div id="tab-stock" class="content">
+    <div class="padded">
+        <div class="sec-head">
+            <span class="sec-title">이유식 재고</span>
+            <button class="btn btn-outline btn-sm" onclick="openStockModal()">+ 추가</button>
+        </div>
+        <div id="stock-list"></div>
+    </div>
+</div>
+
+<!-- ════ 아기 정보 탭 ════ -->
+<div id="tab-baby" class="content">
+    <div class="padded">
+        <div class="card" id="baby-display-card" style="display:none">
+            <div class="card-title">현재 정보</div>
+            <div class="info-grid" id="baby-info-grid"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">아기 정보 입력</div>
+            <div class="form-group">
+                <label>아기 이름</label>
+                <input type="text" id="b-name" placeholder="이름">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>생년월일</label>
+                    <input type="date" id="b-birth">
+                </div>
+                <div class="form-group">
+                    <label>개월 수</label>
+                    <input type="text" id="b-age-display" readonly placeholder="자동 계산">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>알레르기</label>
+                <input type="text" id="b-allergy" placeholder="예: 땅콩, 우유단백">
+            </div>
+            <div class="form-group">
+                <label>특이사항</label>
+                <textarea id="b-note" rows="3" placeholder="기타 메모"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="saveBaby()">저장</button>
+        </div>
+    </div>
+</div>
+
+<!-- ════ 날짜 편집 모달 ════ -->
+<div id="day-modal" class="modal-overlay" onclick="bgClose(event,'day-modal')">
+    <div class="modal">
+        <div class="modal-head">
+            <div class="modal-title" id="day-modal-title">기록 편집</div>
+            <button class="modal-close" onclick="closeDayModal()">&#215;</button>
+        </div>
+
+        <div class="sub-label">먹은 재료 목록</div>
+        <div id="edit-items-list"></div>
+
+        <div class="divider"></div>
+
+        <div class="sub-label">재료 선택 (탭하면 추가/제거)</div>
+        <div class="ing-chips" id="ing-chips"></div>
+
+        <div class="sub-label" style="margin-top:10px">직접 입력</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end">
+            <input type="text" id="ni-emoji" placeholder="🥕"
+                style="width:48px;padding:8px 4px;border:1.5px solid var(--border);border-radius:8px;font-size:18px;text-align:center">
+            <input type="text" id="ni-name" placeholder="재료 이름"
+                style="flex:1;min-width:80px;padding:9px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit">
+            <input type="number" id="ni-amt" placeholder="양"
+                style="width:58px;padding:9px 8px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;text-align:right">
+            <span style="font-size:13px;color:var(--text-light);padding-bottom:9px">g</span>
+            <button class="btn btn-outline btn-sm" onclick="addDirectIngredient()">추가</button>
+        </div>
+
+        <div class="modal-btns">
+            <button class="btn btn-primary" onclick="saveDayLog()">저장</button>
+            <button class="btn btn-outline" onclick="closeDayModal()">취소</button>
+        </div>
+    </div>
+</div>
+
+<!-- ════ 재고 추가/수정 모달 ════ -->
+<div id="stock-modal" class="modal-overlay" onclick="bgClose(event,'stock-modal')">
+    <div class="modal">
+        <div class="modal-head">
+            <div class="modal-title" id="stock-modal-title">이유식 추가</div>
+            <button class="modal-close" onclick="closeStockModal()">&#215;</button>
+        </div>
+        <div class="form-group">
+            <label>이유식 이름 *</label>
+            <input type="text" id="s-name" placeholder="예: 브로콜리 퓨레">
+        </div>
+        <div class="form-group">
+            <label>재료 및 양</label>
+            <input type="text" id="s-ingr" placeholder="예: 브로콜리 15g, 쌀 20g">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>제작 날짜 *</label>
+                <input type="date" id="s-made">
+            </div>
+            <div class="form-group">
+                <label>사용기한 (일)</label>
+                <input type="number" id="s-expire" value="14" min="1">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>총 개수</label>
+                <input type="number" id="s-total" placeholder="0" min="0">
+            </div>
+            <div class="form-group">
+                <label>남은 개수</label>
+                <input type="number" id="s-remain" placeholder="자동" min="0">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>메모</label>
+            <input type="text" id="s-note" placeholder="특이사항">
+        </div>
+        <div class="modal-btns">
+            <button class="btn btn-primary" onclick="saveStock()">저장</button>
+            <button class="btn btn-outline" onclick="closeStockModal()">취소</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ══════════════ 데이터 ══════════════
+let db = { baby: {}, logs: {}, stocks: [] };
+
+const PRESETS = [
+    { name: '쌀',       emoji: '🌾', color: '#8D6E63', bg: '#FFF8E1' },
+    { name: '애호박',   emoji: '🥒', color: '#43A047', bg: '#E8F5E9' },
+    { name: '당근',     emoji: '🥕', color: '#EF6C00', bg: '#FFF3E0' },
+    { name: '청경채',   emoji: '🥬', color: '#2E7D32', bg: '#F1F8E9' },
+    { name: '감자',     emoji: '🥔', color: '#A1887F', bg: '#EFEBE9' },
+    { name: '소고기',   emoji: '🥩', color: '#E53935', bg: '#FCE4EC' },
+    { name: '양배추',   emoji: '🥦', color: '#558B2F', bg: '#F9FBE7' },
+    { name: '브로콜리', emoji: '🥦', color: '#1B5E20', bg: '#E8F5E9' },
+    { name: '닭고기',   emoji: '🍗', color: '#F57F17', bg: '#FFFDE7' },
+    { name: '두부',     emoji: '⬜', color: '#78909C', bg: '#ECEFF1' },
+    { name: '시금치',   emoji: '🌿', color: '#388E3C', bg: '#E8F5E9' },
+    { name: '고구마',   emoji: '🍠', color: '#BF360C', bg: '#FBE9E7' },
+    { name: '단호박',   emoji: '🎃', color: '#E65100', bg: '#FFF3E0' },
+    { name: '사과',     emoji: '🍎', color: '#C62828', bg: '#FFEBEE' },
+    { name: '배',       emoji: '🍐', color: '#558B2F', bg: '#F9FBE7' },
+];
+
+let calYM    = new Date();
+let selDate  = toStr(new Date());
+let editDate = null;
+let editBuf  = [];
+let editStockId = null;
+
+// ══════════════ 스토리지 ══════════════
+function load() {
+    try {
+        const s = localStorage.getItem('iyushik_v3');
+        if (s) {
+            db = JSON.parse(s);
+            if (!db.logs)   db.logs   = {};
+            if (!db.stocks) db.stocks = [];
+            if (!db.baby)   db.baby   = {};
+        } else {
+            initDummyData();
+        }
+    } catch(e) { initDummyData(); }
+}
+function save() { localStorage.setItem('iyushik_v3', JSON.stringify(db)); }
+
+function initDummyData() {
+    db.baby = {
+        name:    '하율',
+        birth:   '2025-11-28',
+        allergy: '없음',
+        note:    '단호박, 고구마를 특히 잘 먹어요 😊'
+    };
+
+    const R  = { emoji:'🌾', name:'쌀',      color:'#8D6E63', bg:'#FFF8E1' };
+    const Z  = { emoji:'🥒', name:'애호박',  color:'#43A047', bg:'#E8F5E9' };
+    const Ca = { emoji:'🥕', name:'당근',    color:'#EF6C00', bg:'#FFF3E0' };
+    const Bk = { emoji:'🥬', name:'청경채',  color:'#2E7D32', bg:'#F1F8E9' };
+    const P  = { emoji:'🥔', name:'감자',    color:'#A1887F', bg:'#EFEBE9' };
+    const Bf = { emoji:'🥩', name:'소고기',  color:'#E53935', bg:'#FCE4EC' };
+    const Cb = { emoji:'🥦', name:'양배추',  color:'#558B2F', bg:'#F9FBE7' };
+    const Br = { emoji:'🥦', name:'브로콜리',color:'#1B5E20', bg:'#E8F5E9' };
+    const Pk = { emoji:'🎃', name:'단호박',  color:'#E65100', bg:'#FFF3E0' };
+
+    function item(base, amount, isNew=false) {
+        return { ...base, amount, isNew };
+    }
+
+    db.logs = {
+        '2026-05-04': [ item(R,40) ],
+        '2026-05-05': [ item(R,40) ],
+        '2026-05-06': [ item(R,60) ],
+        '2026-05-07': [ item(R,60) ],
+        '2026-05-08': [ item(R,60) ],
+        '2026-05-09': [ item(R,60) ],
+        '2026-05-10': [ item(R,60), item(Z,20,true) ],
+        '2026-05-11': [ item(R,30), item(Z,40) ],
+        '2026-05-12': [ item(R,30), item(Z,40) ],
+        '2026-05-13': [ item(R,60), item(Ca,20,true) ],
+        '2026-05-14': [ item(R,30), item(Z,20), item(Ca,20) ],
+        '2026-05-15': [ item(R,60), item(Z,20), item(Ca,20) ],
+        '2026-05-16': [ item(R,30), item(Z,40), item(Ca,20), item(Bk,10,true) ],
+        '2026-05-17': [ item(R,60), item(Z,20), item(Ca,20), item(Bk,15) ],
+        '2026-05-18': [ item(R,60), item(Ca,20), item(Bk,20), item(P,15,true) ],
+        '2026-05-19': [ item(R,60), item(Ca,20), item(Bk,15), item(P,20) ],
+        '2026-05-20': [ item(R,60), item(Ca,20), item(Bk,15), item(P,20) ],
+        '2026-05-21': [ item(R,60), item(Z,20), item(Ca,20), item(Bk,15), item(Bf,15,true) ],
+        '2026-05-22': [ item(R,60), item(Ca,20), item(Bk,15), item(P,20), item(Bf,15) ],
+        '2026-05-23': [ item(R,60), item(Z,20), item(Ca,20), item(Bk,15), item(Bf,30) ],
+        '2026-05-24': [ item(R,70), item(Z,20), item(Ca,20), item(Bk,20), item(Bf,30) ],
+        '2026-05-25': [ item(R,70), item(Ca,20), item(Bk,20), item(Bf,30), item(Cb,20,true) ],
+        '2026-05-26': [ item(R,70), item(Ca,20), item(Bk,20), item(Bf,30), item(Cb,20) ],
+        '2026-05-27': [ item(R,70), item(Ca,20), item(Bf,30), item(Cb,20), item(Pk,20,true) ],
+        '2026-05-28': [ item(R,100), item(Ca,20), item(Bk,15), item(Bf,30), item(Pk,10), item(Br,10,true) ],
+        '2026-05-29': [ item(R,100), item(Ca,20), item(Bf,30), item(Cb,10), item(Br,10) ],
+    };
+
+    db.stocks = [
+        { id:'st1', name:'브로콜리 퓨레',  ingr:'브로콜리 20g, 쌀 30g',    madeDate:'2026-05-20', expireDays:14, total:11, remain:6,  note:'' },
+        { id:'st2', name:'소고기 미음',     ingr:'소고기(안심) 30g, 쌀 40g', madeDate:'2026-05-25', expireDays:14, total:8,  remain:5,  note:'잘게 갈아서 준비' },
+        { id:'st3', name:'단호박 죽',       ingr:'단호박 30g, 쌀 40g',       madeDate:'2026-05-27', expireDays:14, total:10, remain:8,  note:'' },
+        { id:'st4', name:'감자 퓨레',       ingr:'감자 30g',                 madeDate:'2026-05-10', expireDays:14, total:9,  remain:1,  note:'거의 다 씀' },
+        { id:'st5', name:'애호박 당근 미음',ingr:'애호박 20g, 당근 15g, 쌀 30g', madeDate:'2026-05-22', expireDays:14, total:12, remain:3, note:'' },
+    ];
+
+    save();
+}
+
+// ══════════════ 유틸 ══════════════
+function pad(n) { return String(n).padStart(2,'0'); }
+function toStr(d) { return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function fmtDate(s) {
+    if (!s) return '';
+    const [y, m, d] = s.split('-');
+    return `${y}.${m}.${d}`;
+}
+function calcDPlus(birthStr, dateStr) {
+    if (!birthStr || !dateStr) return null;
+    const diff = Math.floor((new Date(dateStr+'T00:00:00') - new Date(birthStr+'T00:00:00')) / 86400000);
+    return diff >= 0 ? diff : null;
+}
+function calcMonths(birthStr) {
+    if (!birthStr) return '';
+    const birth = new Date(birthStr+'T00:00:00'), now = new Date();
+    let m = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+    if (now.getDate() < birth.getDate()) m--;
+    if (m < 0) m = 0;
+    const days = Math.floor((now - birth) / 86400000);
+    return m < 1 ? `${days}일` : `${m}개월`;
+}
+function expireInfo(s) {
+    const exp = new Date(s.madeDate+'T00:00:00');
+    exp.setDate(exp.getDate() + parseInt(s.expireDays || 14));
+    const now = new Date(); now.setHours(0,0,0,0);
+    return { diff: Math.floor((exp - now) / 86400000), expStr: fmtDate(toStr(exp)) };
+}
+function getPreset(name) {
+    return PRESETS.find(p => p.name === name) || { emoji: '🍴', color: '#AAAAAA', bg: '#F5F5F5' };
+}
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+function getFirstMap() {
+    const map = {};
+    for (const ds of Object.keys(db.logs).sort())
+        for (const it of db.logs[ds])
+            if (!(it.name in map)) map[it.name] = ds;
+    return map;
+}
+
+// ══════════════ 탭 ══════════════
+function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach((t, i) =>
+        t.classList.toggle('active', ['calendar','stock','baby'][i] === tab)
+    );
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    if (tab === 'calendar') renderCalendar();
+    if (tab === 'stock')    renderStockList();
+    if (tab === 'baby')     loadBabyForm();
+}
+
+// ══════════════ 아기 정보 ══════════════
+function saveBaby() {
+    db.baby = {
+        name:    document.getElementById('b-name').value.trim(),
+        birth:   document.getElementById('b-birth').value,
+        allergy: document.getElementById('b-allergy').value.trim(),
+        note:    document.getElementById('b-note').value.trim()
+    };
+    save(); updateHeader(); renderBabyDisplay();
+    alert('저장되었습니다.');
+}
+function loadBabyForm() {
+    document.getElementById('b-name').value    = db.baby.name    || '';
+    document.getElementById('b-birth').value   = db.baby.birth   || '';
+    document.getElementById('b-allergy').value = db.baby.allergy || '';
+    document.getElementById('b-note').value    = db.baby.note    || '';
+    updateAgeField(); renderBabyDisplay();
+}
+function updateAgeField() {
+    const b = document.getElementById('b-birth').value;
+    document.getElementById('b-age-display').value = b ? calcMonths(b) : '';
+}
+document.getElementById('b-birth').addEventListener('change', updateAgeField);
+function updateHeader() {
+    const n = db.baby.name || '', a = db.baby.birth ? calcMonths(db.baby.birth) : '';
+    let s = n; if (a) s += (s ? ' · ' : '') + a;
+    document.getElementById('header-sub').textContent = s || '아기 정보를 입력해주세요';
+}
+function renderBabyDisplay() {
+    const b = db.baby, el = document.getElementById('baby-display-card');
+    if (!b.name && !b.birth) { el.style.display = 'none'; return; }
+    el.style.display = 'block';
+    document.getElementById('baby-info-grid').innerHTML = `
+        <div class="info-cell"><div class="lbl">이름</div><div class="val">${b.name||'-'}</div></div>
+        <div class="info-cell"><div class="lbl">생년월일</div><div class="val">${fmtDate(b.birth)||'-'}</div></div>
+        <div class="info-cell"><div class="lbl">개월 수</div><div class="val">${calcMonths(b.birth)||'-'}</div></div>
+        <div class="info-cell"><div class="lbl">알레르기</div><div class="val">${b.allergy||'없음'}</div></div>
+        ${b.note?`<div class="info-cell full"><div class="lbl">메모</div><div class="val" style="font-size:13px;font-weight:500">${b.note}</div></div>`:''}
+    `;
+}
+
+// ══════════════ 달력 ══════════════
+function changeMonth(d) {
+    calYM = new Date(calYM.getFullYear(), calYM.getMonth() + d, 1);
+    renderCalendar();
+}
+function selectDate(dateStr) { selDate = dateStr; renderCalendar(); }
+
+function renderCalendar() {
+    const y = calYM.getFullYear(), m = calYM.getMonth();
+    document.getElementById('cal-title').textContent = `${y}년 ${m+1}월`;
+
+    const todayStr = toStr(new Date());
+    const firstDow = new Date(y, m, 1).getDay();
+    const lastDate = new Date(y, m+1, 0).getDate();
+    const prevLast = new Date(y, m, 0).getDate();
+    const firstMap = getFirstMap();
+    const total    = Math.ceil((firstDow + lastDate) / 7) * 7;
+
+    let day = 1, nextDay = 1, html = '';
+
+    for (let i = 0; i < total; i++) {
+        let cls = 'cal-cell', dateStr = null, num = '';
+
+        if (i < firstDow) {
+            num = prevLast - firstDow + i + 1; cls += ' other-month';
+        } else if (day <= lastDate) {
+            num = day;
+            dateStr = `${y}-${pad(m+1)}-${pad(day)}`;
+            if (dateStr === todayStr) cls += ' today';
+            if (dateStr === selDate)  cls += ' selected';
+            day++;
+        } else {
+            num = nextDay++; cls += ' other-month';
+        }
+
+        if (!dateStr) {
+            html += `<div class="${cls}"><div class="cell-num">${num}</div></div>`;
+            continue;
+        }
+
+        const dp    = calcDPlus(db.baby.birth, dateStr);
+        const items = db.logs[dateStr] || [];
+        const gtot  = items.reduce((s, it) => s + (parseFloat(it.amount)||0), 0);
+
+        const dots = items.slice(0, 6).map(it => {
+            const p = getPreset(it.name);
+            const isFirst = firstMap[it.name] === dateStr;
+            return `<span class="food-dot" style="background:${p.color};${isFirst?'box-shadow:0 0 0 2px white,0 0 0 3px '+p.color:''}" title="${it.name} ${it.amount}g"></span>`;
+        }).join('');
+
+        html += `
+        <div class="${cls}" onclick="selectDate('${dateStr}')">
+            <div class="cell-num">${num}</div>
+            ${dp !== null ? `<div class="cell-dp">D+${dp}</div>` : ''}
+            <div class="cell-dots">${dots}</div>
+            ${gtot > 0 ? `<div class="cell-gtotal">${gtot}g</div>` : ''}
+        </div>`;
+    }
+
+    document.getElementById('cal-grid').innerHTML = html;
+    renderStats();
+    renderDayPanel(selDate);
+    renderLegend(firstMap, y, m);
+}
+
+function renderStats() {
+    const todayStr = toStr(new Date());
+    const items    = db.logs[todayStr] || [];
+    const gtot     = items.reduce((s, it) => s + (parseFloat(it.amount)||0), 0);
+    const dp       = calcDPlus(db.baby.birth, todayStr);
+    const mStr     = `${calYM.getFullYear()}-${pad(calYM.getMonth()+1)}`;
+    const mCnt     = Object.keys(db.logs).filter(d => d.startsWith(mStr)).length;
+    const warn     = db.stocks.filter(s => { const e = expireInfo(s); return e.diff >= 0 && e.diff <= 3; }).length;
+
+    document.getElementById('stats-bar').innerHTML = `
+        ${dp !== null ? `<div class="stat-chip yellow"><div class="sv">D+${dp}</div><div class="sl">생후 일수</div></div>` : ''}
+        <div class="stat-chip pink"><div class="sv">${items.length}</div><div class="sl">오늘 재료 수</div></div>
+        <div class="stat-chip yellow"><div class="sv">${gtot}g</div><div class="sl">오늘 총량</div></div>
+        <div class="stat-chip pink"><div class="sv">${mCnt}</div><div class="sl">이달 기록일</div></div>
+        ${warn > 0 ? `<div class="stat-chip yellow"><div class="sv" style="color:#E05252">${warn}</div><div class="sl">만료임박</div></div>` : ''}
+    `;
+}
+
+function renderDayPanel(dateStr) {
+    const items    = db.logs[dateStr] || [];
+    const dp       = calcDPlus(db.baby.birth, dateStr);
+    const firstMap = getFirstMap();
+    const gtot     = items.reduce((s, it) => s + (parseFloat(it.amount)||0), 0);
+
+    const dpBadge = dp !== null ? `<span class="dp-badge-dp">D+${dp}</span>` : '';
+
+    let body = items.length === 0
+        ? `<div class="dp-empty">이 날의 기록이 없습니다.<br>+ 편집 버튼을 눌러 추가하세요.</div>`
+        : items.map((it, idx) => {
+            const isFirst = firstMap[it.name] === dateStr;
+            return `
+            <div class="dp-food-row">
+                <span class="dp-emoji">${it.emoji}</span>
+                <span class="dp-name">${it.name}</span>
+                ${isFirst ? '<span class="dp-new-tag">첫 시작!</span>' : ''}
+                <span class="dp-amt">${it.amount}g</span>
+                <button class="dp-del" onclick="deleteDayItem('${dateStr}',${idx})">&#215;</button>
+            </div>`;
+        }).join('') + `
+        <div class="dp-total-row">
+            <span class="dp-total-label">총 섭취량</span>
+            <span class="dp-total-val">${gtot}g</span>
+        </div>`;
+
+    document.getElementById('day-panel').innerHTML = `
+        <div class="dp-head">
+            <span class="dp-date">${fmtDate(dateStr)}</span>
+            <div class="dp-badges">
+                ${dpBadge}
+                <button class="dp-badge-add" onclick="openDayModal('${dateStr}')">+ 편집</button>
+            </div>
+        </div>
+        ${body}`;
+}
+
+function deleteDayItem(dateStr, idx) {
+    if (!db.logs[dateStr]) return;
+    db.logs[dateStr].splice(idx, 1);
+    if (db.logs[dateStr].length === 0) delete db.logs[dateStr];
+    save(); renderCalendar();
+}
+
+function renderLegend(firstMap, y, m) {
+    const mStr = `${y}-${pad(m+1)}`;
+    const newOnes = Object.entries(firstMap).filter(([, ds]) => ds.startsWith(mStr));
+    const el = document.getElementById('legend-wrap');
+    if (newOnes.length === 0) { el.innerHTML = ''; return; }
+
+    const chips = newOnes.map(([name, ds]) => {
+        const p = getPreset(name);
+        return `<span class="legend-chip" style="background:${p.bg};color:${p.color}">
+            ${p.emoji} <strong>${name}</strong>
+            <span style="opacity:0.7;font-size:10px;margin-left:2px">${fmtDate(ds)} 시작</span>
+        </span>`;
+    }).join('');
+
+    el.innerHTML = `<div class="legend-outer"><div class="legend-title">이번 달 첫 시작 재료</div><div class="legend-chips">${chips}</div></div>`;
+}
+
+// ══════════════ 날짜 편집 모달 ══════════════
+function openDayModal(dateStr) {
+    editDate = dateStr;
+    const dp = calcDPlus(db.baby.birth, dateStr);
+    document.getElementById('day-modal-title').textContent =
+        fmtDate(dateStr) + (dp !== null ? `  D+${dp}` : '');
+    editBuf = JSON.parse(JSON.stringify(db.logs[dateStr] || []));
+    renderEditItems(); renderIngChips();
+    document.getElementById('day-modal').classList.add('open');
+}
+function closeDayModal() {
+    document.getElementById('day-modal').classList.remove('open');
+    editDate = null;
+}
+function renderEditItems() {
+    const el = document.getElementById('edit-items-list');
+    if (editBuf.length === 0) {
+        el.innerHTML = `<div style="color:var(--text-light);font-size:13px;margin-bottom:4px">재료를 선택하거나 직접 입력하세요.</div>`;
+        return;
+    }
+    el.innerHTML = editBuf.map((it, i) => `
+        <div class="edit-item-row">
+            <span class="edit-item-emoji">${it.emoji}</span>
+            <span class="edit-item-name">${it.name}</span>
+            <input class="edit-item-amt" type="number" value="${it.amount}" min="0"
+                onchange="editBuf[${i}].amount = parseFloat(this.value)||0">
+            <span class="edit-item-unit">g</span>
+            <button class="new-btn ${it.isNew ? 'new-on' : 'new-off'}" onclick="toggleNew(${i})">
+                ${it.isNew ? '신규' : '기존'}
+            </button>
+            <button class="edit-del-btn" onclick="removeEditItem(${i})">&#215;</button>
+        </div>`).join('');
+}
+function toggleNew(i) { editBuf[i].isNew = !editBuf[i].isNew; renderEditItems(); }
+function removeEditItem(i) { editBuf.splice(i, 1); renderEditItems(); renderIngChips(); }
+
+function renderIngChips() {
+    const usedNames = new Set(Object.values(db.logs).flatMap(items => items.map(it => it.name)));
+    const allChips  = [...usedNames].map(name => ({ name, ...getPreset(name) }));
+    PRESETS.forEach(p => { if (!usedNames.has(p.name)) allChips.push(p); });
+
+    document.getElementById('ing-chips').innerHTML = allChips.slice(0, 18).map(c => {
+        const sel = editBuf.some(it => it.name === c.name);
+        return `<div class="ing-chip ${sel ? 'sel' : ''}"
+            style="${sel ? `background:${c.bg};border-color:${c.color};color:${c.color}` : ''}"
+            onclick="toggleChip('${c.name}','${c.emoji}','${c.color}','${c.bg}')">
+            ${c.emoji} ${c.name}
+        </div>`;
+    }).join('');
+}
+function toggleChip(name, emoji, color, bg) {
+    const idx = editBuf.findIndex(it => it.name === name);
+    if (idx >= 0) editBuf.splice(idx, 1);
+    else editBuf.push({ name, emoji, color, bg, amount: 0, isNew: false });
+    renderEditItems(); renderIngChips();
+}
+function addDirectIngredient() {
+    const emoji = document.getElementById('ni-emoji').value.trim() || '🍴';
+    const name  = document.getElementById('ni-name').value.trim();
+    const amt   = parseFloat(document.getElementById('ni-amt').value) || 0;
+    if (!name) { alert('재료 이름을 입력해주세요.'); return; }
+    const p = getPreset(name);
+    editBuf.push({ name, emoji: emoji !== '🍴' ? emoji : p.emoji, color: p.color, bg: p.bg, amount: amt, isNew: false });
+    document.getElementById('ni-emoji').value = '';
+    document.getElementById('ni-name').value  = '';
+    document.getElementById('ni-amt').value   = '';
+    renderEditItems(); renderIngChips();
+}
+function saveDayLog() {
+    if (!editDate) return;
+    const filtered = editBuf.filter(it => it.amount > 0);
+    if (filtered.length === 0) delete db.logs[editDate];
+    else db.logs[editDate] = filtered;
+    save(); closeDayModal(); renderCalendar();
+}
+
+// ══════════════ 이유식 재고 ══════════════
+function openStockModal(id = null) {
+    editStockId = id;
+    document.getElementById('stock-modal-title').textContent = id ? '이유식 수정' : '이유식 추가';
+    if (id) {
+        const s = db.stocks.find(x => x.id === id);
+        document.getElementById('s-name').value   = s.name;
+        document.getElementById('s-ingr').value   = s.ingr   || '';
+        document.getElementById('s-made').value   = s.madeDate;
+        document.getElementById('s-expire').value = s.expireDays;
+        document.getElementById('s-total').value  = s.total;
+        document.getElementById('s-remain').value = s.remain;
+        document.getElementById('s-note').value   = s.note   || '';
+    } else {
+        ['s-name','s-ingr','s-note'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('s-made').value   = toStr(new Date());
+        document.getElementById('s-expire').value = '14';
+        document.getElementById('s-total').value  = '';
+        document.getElementById('s-remain').value = '';
+    }
+    document.getElementById('stock-modal').classList.add('open');
+}
+function closeStockModal() { document.getElementById('stock-modal').classList.remove('open'); }
+function saveStock() {
+    const name = document.getElementById('s-name').value.trim();
+    if (!name) { alert('이유식 이름을 입력해주세요.'); return; }
+    const madeDate = document.getElementById('s-made').value;
+    if (!madeDate) { alert('제작 날짜를 입력해주세요.'); return; }
+    const total  = parseInt(document.getElementById('s-total').value)  || 0;
+    const remain = parseInt(document.getElementById('s-remain').value);
+    const obj = {
+        name, madeDate,
+        ingr:       document.getElementById('s-ingr').value.trim(),
+        expireDays: parseInt(document.getElementById('s-expire').value) || 14,
+        total, remain: isNaN(remain) ? total : remain,
+        note:       document.getElementById('s-note').value.trim()
+    };
+    if (editStockId) {
+        const i = db.stocks.findIndex(x => x.id === editStockId);
+        db.stocks[i] = { ...db.stocks[i], ...obj };
+    } else {
+        obj.id = uid(); db.stocks.push(obj);
+    }
+    save(); closeStockModal(); renderStockList();
+}
+function deleteStock(id) {
+    if (!confirm('삭제하시겠습니까?')) return;
+    db.stocks = db.stocks.filter(x => x.id !== id);
+    save(); renderStockList();
+}
+function adjustStock(id, delta) {
+    const s = db.stocks.find(x => x.id === id);
+    if (!s) return;
+    const next = s.remain + delta;
+    if (next < 0) { alert('재고가 없습니다.'); return; }
+    s.remain = next; save(); renderStockList();
+}
+function renderStockList() {
+    const el = document.getElementById('stock-list');
+    if (db.stocks.length === 0) { el.innerHTML = '<div class="empty">이유식 재고를 추가해보세요.</div>'; return; }
+
+    const sorted = [...db.stocks].sort((a, b) => expireInfo(a).diff - expireInfo(b).diff);
+    el.innerHTML = sorted.map(s => {
+        const ei = expireInfo(s);
+        let tCls = 'good', tTxt = `${ei.diff}일 남음`;
+        if (ei.diff < 0)       { tCls = 'danger';  tTxt = '만료됨'; }
+        else if (ei.diff <= 2) { tCls = 'danger';  tTxt = `D-${ei.diff}`; }
+        else if (ei.diff <= 5) { tCls = 'warning'; tTxt = `D-${ei.diff}`; }
+        let cCls = 'stock-card';
+        if (ei.diff < 0 || ei.diff <= 2) cCls += ' s-danger';
+        else if (ei.diff <= 5)           cCls += ' s-warn';
+        const pct = s.total > 0 ? Math.round((s.remain / s.total) * 100) : 0;
+        return `
+        <div class="${cCls}">
+            <div class="stock-top">
+                <div class="stock-name">${s.name}</div>
+                <span class="expire-tag ${tCls}">${tTxt}</span>
+            </div>
+            <div class="stock-meta">
+                ${s.ingr ? `<span>${s.ingr}</span>` : ''}
+                <span>제작 ${fmtDate(s.madeDate)}</span>
+                <span>기한 ${s.expireDays}일 (${ei.expStr}까지)</span>
+                ${s.note ? `<span>${s.note}</span>` : ''}
+            </div>
+            <div class="count-row">
+                <div><div class="count-big">${s.remain}</div><div class="count-of">/ ${s.total}개</div></div>
+                <div class="prog-wrap">
+                    <div class="prog-track"><div class="prog-fill" style="width:${Math.max(0,Math.min(100,pct))}%"></div></div>
+                    <div class="prog-pct">${pct}% 남음</div>
+                </div>
+                <div class="count-btns">
+                    <button class="circle-btn" onclick="adjustStock('${s.id}',1)" title="+1개">+</button>
+                    <button class="use-btn" onclick="adjustStock('${s.id}',-1)">1개 사용</button>
+                </div>
+            </div>
+            <div class="stock-actions">
+                <button class="act-btn act-edit" onclick="openStockModal('${s.id}')">수정</button>
+                <button class="act-btn act-del"  onclick="deleteStock('${s.id}')">삭제</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ══════════════ 공통 ══════════════
+function bgClose(e, id) {
+    if (e.target === document.getElementById(id))
+        document.getElementById(id).classList.remove('open');
+}
+
+// ══════════════ 초기화 ══════════════
+load();
+updateHeader();
+renderCalendar();
+</script>
+</body>
+</html>

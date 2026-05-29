@@ -1,0 +1,143 @@
+{
+  "baby": {
+    "name": "하율",
+    "birth": "2025-11-28",
+    "allergy": "없음",
+    "note": "단호박, 고구마를 특히 잘 먹어요 😊"
+  },
+  "logs": {
+    "2026-05-04": [{ "emoji": "🌾", "name": "쌀", "color": "#8D6E63", "bg": "#FFF8E1", "amount": 40, "isNew": false }],
+    "2026-05-05": [{ "emoji": "🌾", "name": "쌀", "color": "#8D6E63", "bg": "#FFF8E1", "amount": 40, "isNew": false }],
+    "2026-05-06": [{ "emoji": "🌾", "name": "쌀", "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false }],
+    "2026-05-07": [{ "emoji": "🌾", "name": "쌀", "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false }],
+    "2026-05-08": [{ "emoji": "🌾", "name": "쌀", "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false }],
+    "2026-05-09": [{ "emoji": "🌾", "name": "쌀", "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false }],
+    "2026-05-10": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 20, "isNew": true  }
+    ],
+    "2026-05-11": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 30, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 40, "isNew": false }
+    ],
+    "2026-05-12": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 30, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 40, "isNew": false }
+    ],
+    "2026-05-13": [
+      { "emoji": "🌾", "name": "쌀",   "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥕", "name": "당근", "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": true  }
+    ],
+    "2026-05-14": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 30, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 20, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false }
+    ],
+    "2026-05-15": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 20, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false }
+    ],
+    "2026-05-16": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 30, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 40, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 10, "isNew": true  }
+    ],
+    "2026-05-17": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 20, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 15, "isNew": false }
+    ],
+    "2026-05-18": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 20, "isNew": false },
+      { "emoji": "🥔", "name": "감자",   "color": "#A1887F", "bg": "#EFEBE9", "amount": 15, "isNew": true  }
+    ],
+    "2026-05-19": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 15, "isNew": false },
+      { "emoji": "🥔", "name": "감자",   "color": "#A1887F", "bg": "#EFEBE9", "amount": 20, "isNew": false }
+    ],
+    "2026-05-20": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 15, "isNew": false },
+      { "emoji": "🥔", "name": "감자",   "color": "#A1887F", "bg": "#EFEBE9", "amount": 20, "isNew": false }
+    ],
+    "2026-05-21": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 20, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 15, "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 15, "isNew": true  }
+    ],
+    "2026-05-22": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 15, "isNew": false },
+      { "emoji": "🥔", "name": "감자",   "color": "#A1887F", "bg": "#EFEBE9", "amount": 20, "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 15, "isNew": false }
+    ],
+    "2026-05-23": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 60, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 20, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 15, "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 30, "isNew": false }
+    ],
+    "2026-05-24": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 70, "isNew": false },
+      { "emoji": "🥒", "name": "애호박", "color": "#43A047", "bg": "#E8F5E9", "amount": 20, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 20, "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 30, "isNew": false }
+    ],
+    "2026-05-25": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 70, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 20, "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 30, "isNew": false },
+      { "emoji": "🥦", "name": "양배추", "color": "#558B2F", "bg": "#F9FBE7", "amount": 20, "isNew": true  }
+    ],
+    "2026-05-26": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 70, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 20, "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 30, "isNew": false },
+      { "emoji": "🥦", "name": "양배추", "color": "#558B2F", "bg": "#F9FBE7", "amount": 20, "isNew": false }
+    ],
+    "2026-05-27": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 70, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20, "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 30, "isNew": false },
+      { "emoji": "🥦", "name": "양배추", "color": "#558B2F", "bg": "#F9FBE7", "amount": 20, "isNew": false },
+      { "emoji": "🎃", "name": "단호박", "color": "#E65100", "bg": "#FFF3E0", "amount": 20, "isNew": true  }
+    ],
+    "2026-05-28": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 100, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20,  "isNew": false },
+      { "emoji": "🥬", "name": "청경채", "color": "#2E7D32", "bg": "#F1F8E9", "amount": 15,  "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 30,  "isNew": false },
+      { "emoji": "🎃", "name": "단호박", "color": "#E65100", "bg": "#FFF3E0", "amount": 10,  "isNew": false },
+      { "emoji": "🥦", "name": "브로콜리", "color": "#1B5E20", "bg": "#E8F5E9", "amount": 10, "isNew": true }
+    ],
+    "2026-05-29": [
+      { "emoji": "🌾", "name": "쌀",     "color": "#8D6E63", "bg": "#FFF8E1", "amount": 100, "isNew": false },
+      { "emoji": "🥕", "name": "당근",   "color": "#EF6C00", "bg": "#FFF3E0", "amount": 20,  "isNew": false },
+      { "emoji": "🥩", "name": "소고기", "color": "#E53935", "bg": "#FCE4EC", "amount": 30,  "isNew": false },
+      { "emoji": "🥦", "name": "양배추", "color": "#558B2F", "bg": "#F9FBE7", "amount": 10,  "isNew": false },
+      { "emoji": "🥦", "name": "브로콜리", "color": "#1B5E20", "bg": "#E8F5E9", "amount": 10, "isNew": false }
+    ]
+  },
+  "stocks": [
+    { "id": "st1", "name": "브로콜리 퓨레",   "ingr": "브로콜리 20g, 쌀 30g",             "madeDate": "2026-05-20", "expireDays": 14, "total": 11, "remain": 6, "note": "" },
+    { "id": "st2", "name": "소고기 미음",      "ingr": "소고기(안심) 30g, 쌀 40g",         "madeDate": "2026-05-25", "expireDays": 14, "total": 8,  "remain": 5, "note": "잘게 갈아서 준비" },
+    { "id": "st3", "name": "단호박 죽",        "ingr": "단호박 30g, 쌀 40g",               "madeDate": "2026-05-27", "expireDays": 14, "total": 10, "remain": 8, "note": "" },
+    { "id": "st4", "name": "감자 퓨레",        "ingr": "감자 30g",                          "madeDate": "2026-05-10", "expireDays": 14, "total": 9,  "remain": 1, "note": "거의 다 씀" },
+    { "id": "st5", "name": "애호박 당근 미음", "ingr": "애호박 20g, 당근 15g, 쌀 30g",    "madeDate": "2026-05-22", "expireDays": 14, "total": 12, "remain": 3, "note": "" }
+  ]
+}
