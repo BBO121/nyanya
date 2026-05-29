@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이유식 트래커</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ▣ 헤더 + 탭 (sticky) -->
+<div class="sticky-top">
+    <div class="header">
+        <h1>이유식 트래커</h1>
+        <div class="header-sub" id="header-sub">아기 정보를 입력해주세요</div>
+        <button class="btn-help" onclick="startTutorial()" title="도움말">?</button>
+    </div>
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('calendar')">달력 기록</div>
+        <div class="tab" onclick="switchTab('stock')">이유식 재고</div>
+        <div class="tab" onclick="switchTab('baby')">아기 정보</div>
+    </div>
+</div>
+
+<!-- ════ 달력 탭 ════ -->
+<div id="tab-calendar" class="content active">
+
+    <div class="stats-bar" id="stats-bar"></div>
+
+    <div class="cal-nav-bar">
+        <button class="nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+        <span class="cal-title" id="cal-title"></span>
+        <button class="nav-btn" onclick="changeMonth(1)">&#8250;</button>
+    </div>
+
+    <div class="cal-wrap">
+        <div class="cal-weekrow">
+            <span>일</span><span>월</span><span>화</span>
+            <span>수</span><span>목</span><span>금</span><span>토</span>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+    <!-- 선택 날짜 상세 패널 -->
+    <div class="day-panel" id="day-panel"></div>
+
+    <!-- 신규 재료 범례 -->
+    <div id="legend-wrap"></div>
+
+</div>
+
+<!-- ════ 재고 탭 ════ -->
+<div id="tab-stock" class="content">
+    <div class="padded">
+        <div class="sec-head">
+            <span class="sec-title">이유식 재고</span>
+            <button class="btn btn-outline btn-sm" onclick="openStockModal()">+ 추가</button>
+        </div>
+        <div id="stock-list"></div>
+    </div>
+</div>
+
+<!-- ════ 아기 정보 탭 ════ -->
+<div id="tab-baby" class="content">
+    <div class="padded">
+        <div class="card" id="baby-display-card" style="display:none">
+            <div class="card-title">현재 정보</div>
+            <div class="info-grid" id="baby-info-grid"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">아기 정보 입력</div>
+            <div class="form-group">
+                <label>아기 이름</label>
+                <input type="text" id="b-name" placeholder="이름">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>생년월일</label>
+                    <input type="date" id="b-birth">
+                </div>
+                <div class="form-group">
+                    <label>개월 수</label>
+                    <input type="text" id="b-age-display" readonly placeholder="자동 계산">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>알레르기</label>
+                <input type="text" id="b-allergy" placeholder="예: 땅콩, 우유단백">
+            </div>
+            <div class="form-group">
+                <label>특이사항</label>
+                <textarea id="b-note" rows="3" placeholder="기타 메모"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="saveBaby()">저장</button>
+        </div>
+    </div>
+</div>
+
+<!-- ════ 날짜 편집 모달 ════ -->
+<div id="day-modal" class="modal-overlay" onclick="bgClose(event,'day-modal')">
+    <div class="modal">
+        <div class="modal-head">
+            <div class="modal-title" id="day-modal-title">기록 편집</div>
+            <button class="modal-close" onclick="closeDayModal()">&#215;</button>
+        </div>
+
+        <div class="sub-label">먹은 재료 목록</div>
+        <div id="edit-items-list"></div>
+
+        <div class="divider"></div>
+
+        <div class="sub-label">재료 선택 (탭하면 추가/제거)</div>
+        <div class="ing-chips" id="ing-chips"></div>
+
+        <div class="sub-label" style="margin-top:10px">직접 입력</div>
+        <div id="new-ing-row" style="display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end">
+            <input type="text" id="ni-emoji" placeholder="🥕"
+                style="width:48px;padding:8px 4px;border:1.5px solid var(--border);border-radius:8px;font-size:18px;text-align:center">
+            <input type="text" id="ni-name" placeholder="재료 이름"
+                style="flex:1;min-width:80px;padding:9px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit">
+            <input type="number" id="ni-amt" placeholder="양"
+                style="width:58px;padding:9px 8px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;text-align:right">
+            <span style="font-size:13px;color:var(--text-light);padding-bottom:9px">g</span>
+            <button class="btn btn-outline btn-sm" onclick="addDirectIngredient()">추가</button>
+        </div>
+
+        <div class="modal-btns">
+            <button class="btn btn-primary" onclick="saveDayLog()">저장</button>
+            <button class="btn btn-outline" onclick="closeDayModal()">취소</button>
+        </div>
+    </div>
+</div>
+
+<!-- ════ 재고 추가/수정 모달 ════ -->
+<div id="stock-modal" class="modal-overlay" onclick="bgClose(event,'stock-modal')">
+    <div class="modal">
+        <div class="modal-head">
+            <div class="modal-title" id="stock-modal-title">이유식 추가</div>
+            <button class="modal-close" onclick="closeStockModal()">&#215;</button>
+        </div>
+        <div class="form-group">
+            <label>이유식 이름 *</label>
+            <input type="text" id="s-name" placeholder="예: 브로콜리 퓨레">
+        </div>
+        <div class="form-group">
+            <label>재료 및 양</label>
+            <input type="text" id="s-ingr" placeholder="예: 브로콜리 15g, 쌀 20g">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>제작 날짜 *</label>
+                <input type="date" id="s-made">
+            </div>
+            <div class="form-group">
+                <label>사용기한 (일)</label>
+                <input type="number" id="s-expire" value="14" min="1">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>총 개수</label>
+                <input type="number" id="s-total" placeholder="0" min="0">
+            </div>
+            <div class="form-group">
+                <label>남은 개수</label>
+                <input type="number" id="s-remain" placeholder="자동" min="0">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>메모</label>
+            <input type="text" id="s-note" placeholder="특이사항">
+        </div>
+        <div class="modal-btns">
+            <button class="btn btn-primary" onclick="saveStock()">저장</button>
+            <button class="btn btn-outline" onclick="closeStockModal()">취소</button>
+        </div>
+    </div>
+</div>
+
+<!-- ▣ 튜토리얼 오버레이 -->
+<div id="tut-overlay" class="tut-overlay">
+    <svg id="tut-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <mask id="tut-mask">
+                <rect width="100%" height="100%" fill="white"/>
+                <rect id="tut-hole" rx="14" ry="14" fill="black"/>
+            </mask>
+        </defs>
+        <rect width="100%" height="100%" fill="black" fill-opacity="0.72" mask="url(#tut-mask)"/>
+    </svg>
+    <div id="tut-bubble" class="tut-bubble">
+        <div id="tut-step-label" class="tut-step-label"></div>
+        <div id="tut-title" class="tut-title"></div>
+        <div id="tut-items" class="tut-items"></div>
+        <div class="tut-footer">
+            <div id="tut-dots" class="tut-dots"></div>
+            <div class="tut-btns">
+                <button class="tut-btn-skip" onclick="endTutorial()">건너뛰기</button>
+                <button id="tut-btn-next" class="tut-btn-next" onclick="nextTutStep()">다음 →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

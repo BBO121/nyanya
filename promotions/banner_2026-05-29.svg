@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="450" viewBox="0 0 1200 450">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF0F5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFF8E7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0FFF4;stop-opacity:1" />
+    </linearGradient>
+    <!-- Button gradient -->
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8FAB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B9D;stop-opacity:1" />
+    </linearGradient>
+    <!-- Card shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#FF8FAB" flood-opacity="0.2"/>
+    </filter>
+    <filter id="softShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="450" fill="url(#bgGrad)" rx="0"/>
+
+  <!-- Decorative circles background -->
+  <circle cx="80" cy="80" r="120" fill="#FFB3C6" opacity="0.15"/>
+  <circle cx="1150" cy="380" r="150" fill="#A8E6CF" opacity="0.18"/>
+  <circle cx="1100" cy="60" r="80" fill="#FFD3A5" opacity="0.2"/>
+  <circle cx="60" cy="390" r="100" fill="#B5EAD7" opacity="0.15"/>
+  <circle cx="600" cy="20" r="60" fill="#FFDDE1" opacity="0.25"/>
+
+  <!-- Floating dots decoration -->
+  <circle cx="200" cy="50" r="8" fill="#FFB3C6" opacity="0.5"/>
+  <circle cx="240" cy="30" r="5" fill="#A8E6CF" opacity="0.6"/>
+  <circle cx="160" cy="25" r="6" fill="#FFD3A5" opacity="0.5"/>
+  <circle cx="950" cy="420" r="8" fill="#FFB3C6" opacity="0.5"/>
+  <circle cx="1000" cy="400" r="5" fill="#A8E6CF" opacity="0.6"/>
+  <circle cx="920" cy="430" r="6" fill="#FFD3A5" opacity="0.5"/>
+
+  <!-- Stars decoration -->
+  <text x="120" y="140" font-size="22" opacity="0.4" fill="#FF8FAB">✦</text>
+  <text x="1050" y="120" font-size="18" opacity="0.4" fill="#A8D8C0">✦</text>
+  <text x="980" y="350" font-size="14" opacity="0.35" fill="#FFB347">✦</text>
+  <text x="180" y="320" font-size="16" opacity="0.35" fill="#FF8FAB">✦</text>
+  <text x="550" y="420" font-size="12" opacity="0.3" fill="#A8D8C0">✦</text>
+  <text x="650" y="30" font-size="15" opacity="0.35" fill="#FF8FAB">✦</text>
+
+  <!-- Main card -->
+  <rect x="60" y="40" width="1080" height="370" rx="32" fill="white" opacity="0.88" filter="url(#shadow)"/>
+
+  <!-- Left accent bar -->
+  <rect x="60" y="40" width="14" height="370" rx="7" fill="#FF8FAB" opacity="0.7"/>
+
+  <!-- Top ribbon -->
+  <rect x="74" y="40" width="1066" height="8" rx="4" fill="#FFD3E8" opacity="0.5"/>
+
+  <!-- Baby icon area (left side) -->
+  <!-- Bowl with food -->
+  <ellipse cx="200" cy="260" rx="72" ry="22" fill="#FFE5B4" opacity="0.9" filter="url(#softShadow)"/>
+  <path d="M130 250 Q200 290 270 250" stroke="#FFCC80" stroke-width="2.5" fill="#FFF9EE" opacity="0.95"/>
+  <ellipse cx="200" cy="248" rx="68" ry="20" fill="#FFF3D6" opacity="0.95"/>
+  <!-- Food in bowl -->
+  <ellipse cx="200" cy="244" rx="50" ry="14" fill="#FFB347" opacity="0.75"/>
+  <ellipse cx="188" cy="241" rx="16" ry="9" fill="#FF8C42" opacity="0.6"/>
+  <ellipse cx="212" cy="240" rx="14" ry="8" fill="#FFA05C" opacity="0.55"/>
+  <!-- Bowl shine -->
+  <ellipse cx="175" cy="250" rx="12" ry="4" fill="white" opacity="0.4"/>
+
+  <!-- Spoon -->
+  <line x1="265" y1="215" x2="238" y2="248" stroke="#F4A261" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="268" cy="212" rx="10" ry="7" fill="#F4A261" opacity="0.9" transform="rotate(-30 268 212)"/>
+
+  <!-- Steam wisps -->
+  <path d="M185 225 Q180 215 185 205 Q190 195 185 185" stroke="#FF8FAB" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M200 220 Q195 210 200 200 Q205 190 200 180" stroke="#FFB347" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.45"/>
+  <path d="M215 225 Q210 215 215 205 Q220 195 215 185" stroke="#A8D8C0" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Baby face (cute) -->
+  <circle cx="200" cy="130" r="48" fill="#FDDCB5" filter="url(#softShadow)"/>
+  <!-- Cheeks -->
+  <circle cx="175" cy="140" r="12" fill="#FFB3C6" opacity="0.55"/>
+  <circle cx="225" cy="140" r="12" fill="#FFB3C6" opacity="0.55"/>
+  <!-- Eyes -->
+  <ellipse cx="187" cy="128" rx="7" ry="8" fill="#5D4037"/>
+  <ellipse cx="213" cy="128" rx="7" ry="8" fill="#5D4037"/>
+  <circle cx="189" cy="126" r="2.5" fill="white"/>
+  <circle cx="215" cy="126" r="2.5" fill="white"/>
+  <!-- Smile -->
+  <path d="M187 143 Q200 154 213 143" stroke="#E07B54" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Hair -->
+  <path d="M155 118 Q160 85 200 80 Q240 85 245 118" fill="#8D6E63" opacity="0.85"/>
+  <path d="M155 118 Q152 105 158 95" stroke="#8D6E63" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Hair bow -->
+  <ellipse cx="222" cy="90" rx="14" ry="9" fill="#FF8FAB" opacity="0.9" transform="rotate(-20 222 90)"/>
+  <ellipse cx="238" cy="85" rx="14" ry="9" fill="#FF8FAB" opacity="0.9" transform="rotate(20 238 85)"/>
+  <circle cx="230" cy="88" r="6" fill="#FF6B9D"/>
+
+  <!-- Divider line -->
+  <line x1="320" y1="80" x2="320" y2="380" stroke="#FFD3E8" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
+
+  <!-- Main text area -->
+  <!-- Badge -->
+  <rect x="360" y="85" width="200" height="36" rx="18" fill="#FFE0EC"/>
+  <text x="460" y="109" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="15" fill="#FF6B9D" text-anchor="middle" font-weight="700">🍼 이유식 전문 사이트</text>
+
+  <!-- Main headline -->
+  <text x="360" y="175" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="48" fill="#3D2B1F" font-weight="900" letter-spacing="-1">우리 아이 첫 번째</text>
+  <text x="360" y="235" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="54" font-weight="900" letter-spacing="-1">
+    <tspan fill="#FF6B9D">이유식</tspan>
+    <tspan fill="#3D2B1F">, 함께해요!</tspan>
+  </text>
+
+  <!-- Sub description -->
+  <text x="362" y="285" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="19" fill="#7A6652" letter-spacing="0">엄마들을 위한 맞춤 이유식 레시피 &amp; 정보 공유 공간</text>
+
+  <!-- Feature tags -->
+  <rect x="360" y="308" width="118" height="34" rx="17" fill="#FFF0F5" stroke="#FFB3C6" stroke-width="1.5"/>
+  <text x="419" y="330" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="14" fill="#FF6B9D" text-anchor="middle">🥕 단계별 레시피</text>
+
+  <rect x="492" y="308" width="118" height="34" rx="17" fill="#F0FFF8" stroke="#A8D8C0" stroke-width="1.5"/>
+  <text x="551" y="330" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="14" fill="#2E9E6B" text-anchor="middle">💬 육아 커뮤니티</text>
+
+  <rect x="624" y="308" width="118" height="34" rx="17" fill="#FFFAF0" stroke="#FFD3A5" stroke-width="1.5"/>
+  <text x="683" y="330" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="14" fill="#E07B2B" text-anchor="middle">📋 영양 가이드</text>
+
+  <!-- CTA Button -->
+  <rect x="360" y="360" width="180" height="48" rx="24" fill="url(#btnGrad)" filter="url(#softShadow)"/>
+  <text x="450" y="391" font-family="'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="17" fill="white" text-anchor="middle" font-weight="700">지금 바로 시작하기 →</text>
+
+  <!-- Right illustration area -->
+  <!-- Vegetable icons floating -->
+  <!-- Carrot -->
+  <text x="870" y="130" font-size="52" opacity="0.85">🥕</text>
+  <!-- Broccoli -->
+  <text x="960" y="170" font-size="46" opacity="0.8">🥦</text>
+  <!-- Sweet potato -->
+  <text x="840" y="200" font-size="44" opacity="0.75">🍠</text>
+  <!-- Apple -->
+  <text x="1020" y="120" font-size="40" opacity="0.8">🍎</text>
+  <!-- Avocado -->
+  <text x="1060" y="210" font-size="42" opacity="0.75">🥑</text>
+  <!-- Banana -->
+  <text x="900" y="270" font-size="38" opacity="0.7">🍌</text>
+  <!-- Pumpkin -->
+  <text x="980" y="300" font-size="40" opacity="0.75">🎃</text>
+  <!-- Baby bottle -->
+  <text x="850" y="330" font-size="36" opacity="0.7">🍼</text>
+  <!-- Heart -->
+  <text x="1060" y="330" font-size="30" opacity="0.65" fill="#FF6B9D">💕</text>
+  <!-- Spoon fork -->
+  <text x="1000" y="370" font-size="32" opacity="0.65">🥄</text>
+
+  <!-- Sparkles around vegetables -->
+  <text x="930" y="100" font-size="16" fill="#FFD700" opacity="0.7">✨</text>
+  <text x="1085" y="160" font-size="14" fill="#FFD700" opacity="0.65">✨</text>
+  <text x="825" y="240" font-size="12" fill="#FFD700" opacity="0.6">✨</text>
+  <text x="1050" y="370" font-size="16" fill="#FFD700" opacity="0.65">✨</text>
+
+  <!-- Bottom wave decoration -->
+  <path d="M0 420 Q150 400 300 415 Q450 430 600 415 Q750 400 900 415 Q1050 430 1200 415 L1200 450 L0 450 Z" fill="#FFE8F0" opacity="0.35"/>
+  <path d="M0 435 Q200 420 400 432 Q600 444 800 432 Q1000 420 1200 435 L1200 450 L0 450 Z" fill="#E8F8F0" opacity="0.3"/>
+</svg>
